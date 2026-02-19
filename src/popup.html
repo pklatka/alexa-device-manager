@@ -1,0 +1,195 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <meta charset="utf-8">
+  <style>
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+      width: 400px;
+      padding: 15px;
+      margin: 0;
+      background-color: #f8f9fa;
+      color: #333;
+    }
+
+    .header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      border-bottom: 1px solid #ddd;
+      padding-bottom: 10px;
+      margin-bottom: 10px;
+    }
+
+    h2 {
+      font-size: 16px;
+      margin: 0;
+    }
+
+    .header-actions {
+      display: flex;
+      gap: 6px;
+    }
+
+    .refresh-btn {
+      background: none;
+      border: 1px solid #ccc;
+      border-radius: 4px;
+      padding: 6px 10px;
+      cursor: pointer;
+      font-size: 12px;
+      color: #555;
+      transition: background 0.2s, border-color 0.2s;
+    }
+
+    .refresh-btn:hover {
+      background-color: #e9ecef;
+      border-color: #adb5bd;
+    }
+
+    .refresh-btn:disabled {
+      color: #adb5bd;
+      cursor: not-allowed;
+    }
+
+    .delete-all-btn {
+      background-color: #dc3545;
+      color: white;
+      border: none;
+      border-radius: 4px;
+      padding: 6px 12px;
+      cursor: pointer;
+      font-size: 12px;
+    }
+
+    .delete-all-btn:hover {
+      background-color: #c82333;
+    }
+
+    .delete-all-btn:disabled {
+      background-color: #6c757d;
+      cursor: not-allowed;
+    }
+
+    .device-list {
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+      max-height: 400px;
+      overflow-y: auto;
+    }
+
+    .device-card {
+      display: flex;
+      flex-direction: column;
+      background: white;
+      padding: 10px;
+      border-radius: 6px;
+      box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+      gap: 6px;
+    }
+
+    .device-top-row {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    .device-info {
+      display: flex;
+      gap: 8px;
+      flex-wrap: wrap;
+      padding: 0 6px;
+    }
+
+    .device-description {
+      color: #888;
+      font-size: 11px;
+    }
+
+    .device-name-input {
+      font-family: inherit;
+      font-weight: 500;
+      font-size: 14px;
+      border: 1px solid transparent;
+      background: transparent;
+      padding: 4px 6px;
+      flex-grow: 1;
+      margin-right: 10px;
+      border-radius: 4px;
+      color: #333;
+    }
+
+    .device-name-input:not(:disabled) {
+      border: 1px solid #007bff;
+      background: #fff;
+      outline: none;
+      box-shadow: 0 0 0 2px rgba(0, 123, 255, .25);
+    }
+
+    .actions {
+      display: flex;
+      gap: 6px;
+      flex-shrink: 0;
+    }
+
+    .action-btn {
+      color: white;
+      border: none;
+      border-radius: 4px;
+      padding: 6px 10px;
+      cursor: pointer;
+      font-size: 12px;
+      transition: background 0.2s;
+    }
+
+    .action-btn:disabled {
+      background-color: #6c757d;
+      cursor: not-allowed;
+    }
+
+    .edit-btn {
+      background-color: #007bff;
+    }
+
+    .edit-btn:hover:not(:disabled) {
+      background-color: #0056b3;
+    }
+
+    .delete-btn {
+      background-color: #dc3545;
+    }
+
+    .delete-btn:hover:not(:disabled) {
+      background-color: #c82333;
+    }
+
+    .status {
+      font-size: 13px;
+      color: #666;
+      margin-bottom: 10px;
+    }
+
+    .error {
+      color: #dc3545;
+    }
+  </style>
+</head>
+
+<body>
+  <div class="header">
+    <h2>Alexa Devices</h2>
+    <div class="header-actions">
+      <button id="refresh-btn" class="refresh-btn" disabled>↻ Refresh</button>
+      <button id="delete-all-btn" class="delete-all-btn" disabled>Delete all</button>
+    </div>
+  </div>
+
+  <div id="status" class="status">Checking session...</div>
+  <div id="device-list" class="device-list"></div>
+
+  <script src="popup.js"></script>
+</body>
+
+</html>
