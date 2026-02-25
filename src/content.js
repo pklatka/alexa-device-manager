@@ -15,6 +15,10 @@ chrome.runtime.onMessage.addListener((request, sender, sendResponse) => {
                 .then(() => sendResponse({ success: true }))
                 .catch(err => sendResponse({ success: false, error: err.message }));
             return true;
+        case "checkSignIn":
+            const signedIn = !document.querySelector('a[href="/signin"]');
+            sendResponse({ signedIn: signedIn });
+            return true;
         default:
             return false;
     }

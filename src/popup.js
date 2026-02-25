@@ -11,12 +11,19 @@ document.addEventListener("DOMContentLoaded", () => {
         currentTabId = activeTab.id;
 
         if (!activeTab.url.includes("alexa.amazon.com")) {
-            statusEl.innerHTML = `<span class="error">Please navigate to and log into <a href="https://alexa.amazon.com" target="_blank">alexa.amazon.com</a> to manage your devices.</span>`;
+            statusEl.innerHTML = `<span class="error">Please navigate to <a href="https://alexa.amazon.com" target="_blank">alexa.amazon.com</a> to manage your devices.</span>`;
             return;
         }
 
-        refreshBtn.disabled = false;
-        loadDevices();
+        chrome.tabs.sendMessage(activeTab.id, { action: "checkSignIn" }, (response) => {
+            if (response && response.signedIn === false) {
+                statusEl.innerHTML = `<span class="error">Please sign in to your Amazon account to manage your devices.</span>`;
+                return;
+            }
+
+            refreshBtn.disabled = false;
+            loadDevices();
+        });
     });
 
     function loadDevices() {
