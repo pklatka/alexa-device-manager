@@ -15,6 +15,12 @@ A Chrome extension for managing your Amazon Alexa devices directly from the brow
 
 ## Installation
 
+### Chrome Web Store
+
+Go to [Chrome Web Store](https://chromewebstore.google.com/detail/fogcopaameafjdpbbdoagfeinmdlodij?utm_source=item-share-cb) and install the extension.
+
+### Manual 
+
 1. Clone or download this repository:
    ```bash
    git clone https://github.com/pklatka/alexa-device-manager.git
