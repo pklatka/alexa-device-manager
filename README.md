@@ -43,7 +43,7 @@ The extension injects a content script into `alexa.amazon.com` pages. When the p
 
 | Action  | Endpoint                              | Method |
 | ------- | ------------------------------------- | ------ |
-| Fetch   | `/nexus/v1/graphql` (GraphQL)         | POST   |
+| Fetch   | `/nexus/v1/graphql`                   | POST   |
 | Rename  | `/api/phoenix/alias`                  | POST   |
 | Delete  | `/api/phoenix/appliance/{applianceId}` | DELETE |
 
