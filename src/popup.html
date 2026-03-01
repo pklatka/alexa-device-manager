@@ -77,6 +77,9 @@
       cursor: pointer;
       font-size: 12px;
       color: #555;
+      display: flex;
+      align-items: center;
+      gap: 6px;
       transition: background 0.2s, border-color 0.2s;
     }
 
@@ -90,6 +93,12 @@
       cursor: not-allowed;
     }
 
+    .refresh-icon {
+      width: 14px;
+      height: 14px;
+      margin-bottom: 1px;
+    }
+
     .delete-all-btn {
       background-color: #dc3545;
       color: white;
@@ -98,6 +107,15 @@
       padding: 6px 12px;
       cursor: pointer;
       font-size: 12px;
+      display: flex;
+      align-items: center;
+      gap: 6px;
+    }
+
+    .delete-icon {
+      width: 14px;
+      height: 14px;
+      margin-bottom: 1px;
     }
 
     .delete-all-btn:hover {
@@ -306,8 +324,14 @@
       <h2>Alexa Devices</h2>
     </div>
     <div class="header-actions">
-      <button id="refresh-btn" class="refresh-btn" disabled>↻ Refresh</button>
-      <button id="delete-all-btn" class="delete-all-btn" disabled>Delete all</button>
+      <button id="refresh-btn" class="refresh-btn" disabled>
+        <img src="../icons/refresh.svg" alt="refresh" class="refresh-icon">
+        Refresh
+      </button>
+      <button id="delete-all-btn" class="delete-all-btn" disabled>
+        <img src="../icons/bin.svg" alt="delete" class="delete-icon">
+        Delete all
+      </button>
     </div>
   </header>
 
