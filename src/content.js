@@ -16,7 +16,13 @@ chrome.runtime.onMessage.addListener((request, sender, sendResponse) => {
                 .catch(err => sendResponse({ success: false, error: err.message }));
             return true;
         case "checkSignIn":
-            const signedIn = !document.querySelector('a[href="/signin"]');
+            const signedIn = !document.evaluate(
+                "//*[contains(text(), 'Sign In')]",
+                document,
+                null,
+                XPathResult.FIRST_ORDERED_NODE_TYPE,
+                null
+            ).singleNodeValue;
             sendResponse({ signedIn });
             return true;
         default:
