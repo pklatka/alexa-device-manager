@@ -226,7 +226,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
         progressCounter.textContent = `0 / ${total} deleted`;
 
-        const deletePromises = [...cards].map(card => {
+        const deletePromises = [...cards].map(async card => {
             const deleteBtn = card.querySelector('.delete-btn');
             if (!deleteBtn || deleteBtn.disabled) {
                 completed++;
@@ -234,12 +234,17 @@ document.addEventListener("DOMContentLoaded", () => {
                 return Promise.resolve();
             }
 
-            return deleteDevice(card.dataset.applianceId, deleteBtn, card, currentTabId)
-                .then(success => {
-                    completed++;
-                    if (!success) failed++;
-                    updateProgress();
-                });
+            let success = false;
+            for (let attempt = 0; attempt < 5; attempt++) {
+                success = await deleteDevice(card.dataset.applianceId, deleteBtn, card, currentTabId);
+                if (success) break;
+                // wait between attempts
+                await new Promise(resolve => setTimeout(resolve, 200));
+            }
+
+            completed++;
+            if (!success) failed++;
+            updateProgress();
         });
 
         await Promise.all(deletePromises);
