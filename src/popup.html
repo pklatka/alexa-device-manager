@@ -13,7 +13,7 @@
       color: #333;
     }
 
-    .header {
+    header {
       display: flex;
       justify-content: space-between;
       align-items: center;
@@ -22,8 +22,22 @@
       margin-bottom: 10px;
     }
 
+    .header-title {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .header-title img {
+      height: 20px;
+    }
+
+    main {
+      height: 430px;
+    }
+
     h2 {
-      font-size: 16px;
+      font-size: 18px;
       margin: 0;
     }
 
@@ -78,7 +92,7 @@
       gap: 10px;
       width: calc(100% + 24px);
       transform: translateX(-12px);
-      max-height: 400px;
+      height: 400px;
       overflow-y: auto;
       padding-top: 1px;
       padding-bottom: 3px;
@@ -200,45 +214,83 @@
       margin-bottom: 10px;
     }
 
-    .error {
-      color: #dc3545;
+    .status.large {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      font-size: 14px;
+      font-weight: 500;
+      padding: 16px 24px;
+      border-radius: 12px;
+      text-align: center;
+      box-shadow: 0 8px 24px rgba(0, 0, 0, 0.12);
+      z-index: 1000;
+      max-width: 80%;
+      backdrop-filter: blur(8px);
+      display: none;
     }
 
-    .donate-footer {
+    .status.large.info {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 10px;
+      background-color: rgba(255, 255, 255, 0.95);
+      color: #333;
+      border: 1px solid rgba(0, 0, 0, 0.05);
+    }
+
+    .status.large.error {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 10px;
+      background-color: rgba(255, 245, 245, 0.95);
+      color: #dc3545;
+      border: 1px solid rgba(255, 224, 224, 0.8);
+    }
+
+    footer {
       text-align: center;
       margin-top: 12px;
       padding-top: 8px;
       border-top: 1px solid #eee;
     }
 
-    .donate-footer a {
+    footer a {
       font-size: 11px;
       color: #adb5bd;
       text-decoration: none;
       transition: color 0.2s;
     }
 
-    .donate-footer a:hover {
+    footer a:hover {
       color: #e4597d;
     }
   </style>
 </head>
 
 <body>
-  <div class="header">
-    <h2>Alexa Devices</h2>
+  <header>
+    <div class="header-title">
+      <img src="../icons/icon.png" alt="icon">
+      <h2>Alexa Devices</h2>
+    </div>
     <div class="header-actions">
       <button id="refresh-btn" class="refresh-btn" disabled>↻ Refresh</button>
       <button id="delete-all-btn" class="delete-all-btn" disabled>Delete all</button>
     </div>
-  </div>
+  </header>
 
-  <div id="status" class="status">Checking session...</div>
-  <div id="device-list" class="device-list"></div>
+  <main>
+    <div id="status" class="status large info">Checking session...</div>
+    <div id="device-list" class="device-list"></div>
+  </main>
 
-  <div class="donate-footer">
+  <footer>
     <a href="https://github.com/sponsors/pklatka" target="_blank">♥ Support this project</a>
-  </div>
+  </footer>
 
   <script src="popup.js"></script>
 </body>

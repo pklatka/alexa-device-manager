@@ -11,13 +11,15 @@ document.addEventListener("DOMContentLoaded", () => {
         currentTabId = activeTab.id;
 
         if (!activeTab.url.includes("alexa.amazon.com")) {
-            statusEl.innerHTML = `<span class="error">Please navigate to <a href="https://alexa.amazon.com" target="_blank">alexa.amazon.com</a> to manage your devices.</span>`;
+            statusEl.innerHTML = `Please navigate to <a href="https://alexa.amazon.com" target="_blank">alexa.amazon.com</a> to manage your devices.`;
+            statusEl.className = "status large error";
             return;
         }
 
         chrome.tabs.sendMessage(activeTab.id, { action: "checkSignIn" }, (response) => {
             if (response && response.signedIn === false) {
-                statusEl.innerHTML = `<span class="error">Please sign in to your Amazon account to manage your devices.</span>`;
+                statusEl.innerHTML = `Please sign in to your Amazon account to manage your devices.`;
+                statusEl.className = "status large error";
                 return;
             }
 
@@ -28,25 +30,31 @@ document.addEventListener("DOMContentLoaded", () => {
 
     function loadDevices() {
         statusEl.innerText = "Fetching devices...";
+        statusEl.className = "status large info";
+        deviceListEl.innerHTML = "";
         deleteAllBtn.disabled = true;
 
         chrome.tabs.sendMessage(currentTabId, { action: "fetchDevices" }, (response) => {
             if (chrome.runtime.lastError || !response) {
-                statusEl.innerHTML = `<span class="error">Error connecting. Try refreshing the page.</span>`;
+                statusEl.innerHTML = `Error connecting. Try refreshing the page.`;
+                statusEl.className = "status large error";
                 return;
             }
             if (response.error) {
-                statusEl.innerHTML = `<span class="error">${response.error}</span>`;
+                statusEl.innerHTML = response.error;
+                statusEl.className = "status large error";
                 return;
             }
 
             const devices = response.devices;
             if (!devices || devices.length === 0) {
                 statusEl.innerText = "No devices found.";
+                statusEl.className = "status large info";
                 return;
             }
 
-            statusEl.innerText = `Found ${devices.length} devices.`;
+            statusEl.className = "status";
+            statusEl.innerText = `${devices.length} devices found.`
             renderDevices(devices, currentTabId);
             deleteAllBtn.disabled = false;
         });
