@@ -3,6 +3,7 @@ document.addEventListener("DOMContentLoaded", () => {
     const deviceListEl = document.getElementById("device-list");
     const deleteAllBtn = document.getElementById("delete-all-btn");
     const refreshBtn = document.getElementById("refresh-btn");
+    const spinnerEl = document.getElementById("spinner");
 
     let currentTabId = null;
 
@@ -29,12 +30,14 @@ document.addEventListener("DOMContentLoaded", () => {
     });
 
     function loadDevices() {
-        statusEl.innerText = "Fetching devices...";
-        statusEl.className = "status large info";
+        statusEl.innerText = "";
+        statusEl.className = "status";
+        spinnerEl.style.display = "flex";
         deviceListEl.innerHTML = "";
         deleteAllBtn.disabled = true;
 
         chrome.tabs.sendMessage(currentTabId, { action: "fetchDevices" }, (response) => {
+            spinnerEl.style.display = "none";
             if (chrome.runtime.lastError || !response) {
                 statusEl.innerHTML = `Error connecting. Try refreshing the page.`;
                 statusEl.className = "status large error";

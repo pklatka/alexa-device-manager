@@ -34,6 +34,29 @@
 
     main {
       height: 430px;
+      position: relative;
+    }
+
+    .spinner {
+      width: 36px;
+      height: 36px;
+      border: 4px solid rgba(0, 123, 255, 0.2);
+      border-left-color: #007bff;
+      border-radius: 50%;
+      animation: spin 1s linear infinite;
+      position: absolute;
+      top: calc(50% - 18px);
+      left: calc(50% - 18px);
+    }
+
+    @keyframes spin {
+      0% {
+        transform: rotate(0deg);
+      }
+
+      100% {
+        transform: rotate(360deg);
+      }
     }
 
     h2 {
@@ -231,6 +254,10 @@
       display: none;
     }
 
+    .status.large>a {
+      display: contents;
+    }
+
     .status.large.info {
       display: flex;
       flex-direction: column;
@@ -244,6 +271,7 @@
     .status.large.error {
       display: flex;
       flex-direction: column;
+      width: 80%;
       align-items: center;
       gap: 10px;
       background-color: rgba(255, 245, 245, 0.95);
@@ -284,6 +312,7 @@
   </header>
 
   <main>
+    <div id="spinner" class="spinner"></div>
     <div id="status" class="status large info">Checking session...</div>
     <div id="device-list" class="device-list"></div>
   </main>
