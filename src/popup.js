@@ -75,6 +75,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
             const card = document.createElement("div");
             card.className = "device-card";
+            card.dataset.applianceId = applianceId;
 
             // Input field for renaming
             const nameInput = document.createElement("input");
@@ -198,13 +199,68 @@ document.addEventListener("DOMContentLoaded", () => {
         if (!isConfirmed) return;
 
         deleteAllBtn.disabled = true;
-        deleteAllBtn.innerText = "Processing...";
+        refreshBtn.disabled = true;
 
-        const allDeleteButtons = document.querySelectorAll('.delete-btn:not(:disabled)');
-        for (const btn of allDeleteButtons) {
-            btn.click();
-            await new Promise(resolve => setTimeout(resolve, 500));
+        const progressContainer = document.getElementById("progress-container");
+        const progressFill = document.getElementById("progress-fill");
+        const progressCounter = document.getElementById("progress-counter");
+        const progressLabel = document.getElementById("progress-label");
+
+        // Swap device list for progress bar
+        deviceListEl.style.display = "none";
+        statusEl.style.display = "none";
+        progressFill.style.width = "0%";
+        progressFill.classList.remove("done", "warn");
+        progressLabel.textContent = "Deleting devices\u2026";
+        progressContainer.style.display = "flex";
+
+        const cards = deviceListEl.querySelectorAll('.device-card');
+        const total = cards.length;
+        let completed = 0;
+        let failed = 0;
+
+        const updateProgress = () => {
+            progressFill.style.width = `${(completed / total) * 100}%`;
+            progressCounter.textContent = `${completed} / ${total} deleted` + (failed > 0 ? ` (${failed} failed)` : ``);
+        };
+
+        progressCounter.textContent = `0 / ${total} deleted`;
+
+        const deletePromises = [...cards].map(card => {
+            const deleteBtn = card.querySelector('.delete-btn');
+            if (!deleteBtn || deleteBtn.disabled) {
+                completed++;
+                updateProgress();
+                return Promise.resolve();
+            }
+
+            return deleteDevice(card.dataset.applianceId, deleteBtn, card, currentTabId)
+                .then(success => {
+                    completed++;
+                    if (!success) failed++;
+                    updateProgress();
+                });
+        });
+
+        await Promise.all(deletePromises);
+
+        if (failed > 0) {
+            progressFill.classList.add("warn");
+            progressLabel.textContent = `Finished with ${failed} error${failed > 1 ? "s" : ""}`;
+        } else {
+            progressFill.classList.add("done");
+            progressLabel.textContent = "All devices deleted!";
         }
-        deleteAllBtn.innerText = "Finished";
+
+        const progressRefreshBtn = document.getElementById("progress-refresh-btn");
+        progressRefreshBtn.style.display = "inline-block";
+        progressRefreshBtn.onclick = () => {
+            progressContainer.style.display = "none";
+            progressRefreshBtn.style.display = "none";
+            deviceListEl.style.display = "";
+            statusEl.style.display = "";
+            refreshBtn.disabled = false;
+            loadDevices();
+        };
     });
 });
