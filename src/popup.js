@@ -166,8 +166,35 @@ document.addEventListener("DOMContentLoaded", () => {
         });
     }
 
+    function showConfirmDialog() {
+        const dialog = document.getElementById("confirm-dialog");
+        const cancelBtn = document.getElementById("dialog-cancel");
+        const confirmBtn = document.getElementById("dialog-confirm");
+
+        return new Promise((resolve) => {
+            dialog.classList.add("visible");
+
+            function cleanup(result) {
+                dialog.classList.remove("visible");
+                cancelBtn.removeEventListener("click", onCancel);
+                confirmBtn.removeEventListener("click", onConfirm);
+                resolve(result);
+            }
+
+            function onCancel() { cleanup(false); }
+            function onConfirm() { cleanup(true); }
+
+            cancelBtn.addEventListener("click", onCancel);
+            confirmBtn.addEventListener("click", onConfirm);
+
+            dialog.addEventListener("click", (e) => {
+                if (e.target === dialog) cleanup(false);
+            }, { once: true });
+        });
+    }
+
     deleteAllBtn.addEventListener("click", async () => {
-        const isConfirmed = confirm("Are you sure you want to delete ALL devices listed below? This action cannot be undone.");
+        const isConfirmed = await showConfirmDialog();
         if (!isConfirmed) return;
 
         deleteAllBtn.disabled = true;
