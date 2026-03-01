@@ -29,10 +29,15 @@ header {
 }
 
 .header-title img {
-  height: 24px;
+  height: 42px;
 }
 
-h2 {
+.header-title-text {
+  text-wrap: wrap;
+  width: 150px;
+}
+
+.header-title-text h2 {
   font-size: 18px;
   margin: 0;
 }
