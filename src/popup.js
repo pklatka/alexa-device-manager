@@ -235,7 +235,7 @@ document.addEventListener("DOMContentLoaded", () => {
             }
 
             let success = false;
-            for (let attempt = 0; attempt < 5; attempt++) {
+            for (let attempt = 0; attempt < 10; attempt++) {
                 success = await deleteDevice(card.dataset.applianceId, deleteBtn, card, currentTabId);
                 if (success) break;
                 // wait between attempts
