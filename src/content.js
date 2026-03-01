@@ -2,7 +2,7 @@ chrome.runtime.onMessage.addListener((request, sender, sendResponse) => {
     switch (request.action) {
         case "fetchDevices":
             fetchDevices()
-                .then(devices => sendResponse({ devices: devices }))
+                .then(devices => sendResponse({ devices }))
                 .catch(err => sendResponse({ error: err.message }));
             return true;
         case "deleteDevice":
@@ -17,7 +17,7 @@ chrome.runtime.onMessage.addListener((request, sender, sendResponse) => {
             return true;
         case "checkSignIn":
             const signedIn = !document.querySelector('a[href="/signin"]');
-            sendResponse({ signedIn: signedIn });
+            sendResponse({ signedIn });
             return true;
         default:
             return false;
