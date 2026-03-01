@@ -5,7 +5,7 @@
 /* ----- Base / Global ----- */
 body {
   font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
-  width: 400px;
+  width: 420px;
   padding: 15px;
   margin: 0;
   background-color: #f8f9fa;
@@ -123,8 +123,13 @@ main {
 }
 
 @keyframes spin {
-  0%   { transform: rotate(0deg); }
-  100% { transform: rotate(360deg); }
+  0% {
+    transform: rotate(0deg);
+  }
+
+  100% {
+    transform: rotate(360deg);
+  }
 }
 
 /* ----- Device List & Scrollbar ----- */
@@ -281,7 +286,7 @@ main {
   display: none;
 }
 
-.status.large > a {
+.status.large>a {
   display: contents;
 }
 
@@ -455,6 +460,7 @@ footer a:hover {
     opacity: 0;
     transform: translateY(8px);
   }
+
   to {
     opacity: 1;
     transform: translateY(0);
