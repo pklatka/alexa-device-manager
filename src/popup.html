@@ -76,9 +76,36 @@
       display: flex;
       flex-direction: column;
       gap: 10px;
+      width: calc(100% + 24px);
+      transform: translateX(-12px);
       max-height: 400px;
       overflow-y: auto;
-      padding: -15px;
+      padding-top: 1px;
+      padding-bottom: 3px;
+      scrollbar-gutter: stable;
+      scrollbar-width: thin;
+      scrollbar-color: rgba(0, 0, 0, 0.15) transparent;
+    }
+
+    .device-list:hover {
+      scrollbar-color: rgba(0, 0, 0, 0.3) transparent;
+    }
+
+    .device-list::-webkit-scrollbar {
+      width: 5px;
+    }
+
+    .device-list::-webkit-scrollbar-track {
+      background: transparent;
+    }
+
+    .device-list::-webkit-scrollbar-thumb {
+      background-color: rgba(0, 0, 0, 0.15);
+      border-radius: 10px;
+    }
+
+    .device-list:hover::-webkit-scrollbar-thumb {
+      background-color: rgba(0, 0, 0, 0.3);
     }
 
     .device-card {
@@ -86,6 +113,7 @@
       flex-direction: column;
       background: white;
       padding: 10px;
+      margin: 0 12px;
       border-radius: 6px;
       box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
       gap: 6px;
