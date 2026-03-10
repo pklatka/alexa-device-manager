@@ -7,7 +7,7 @@ set -e
 
 # Project root (one level up from scripts/)
 ROOT_DIR="$(cd "$(dirname "$0")/.." && pwd)"
-BUILD_DIR="$ROOT_DIR/build"
+BUILD_DIR="build"
 ZIP_FILE="$ROOT_DIR/build.zip"
 
 # Clean previous build
@@ -29,7 +29,6 @@ cp "$ROOT_DIR/src/content.js" "$BUILD_DIR/src/"
 cp "$ROOT_DIR/icons/icon16.png"  "$BUILD_DIR/icons/"
 cp "$ROOT_DIR/icons/icon48.png"  "$BUILD_DIR/icons/"
 cp "$ROOT_DIR/icons/icon128.png" "$BUILD_DIR/icons/"
-cp "$ROOT_DIR/icons/icon.png"    "$BUILD_DIR/icons/"
 cp "$ROOT_DIR/icons/bin.svg"     "$BUILD_DIR/icons/"
 cp "$ROOT_DIR/icons/refresh.svg" "$BUILD_DIR/icons/"
 
