@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<style>
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  html, body {
+    width: 1400px; height: 560px; overflow: hidden;
+    font-family: Roboto, "Liberation Sans", sans-serif;
+    background: #16191c;
+  }
+  .stage {
+    position: relative; width: 1400px; height: 560px;
+    display: flex; align-items: center; overflow: hidden;
+  }
+  /* Warm glow, replacing the old cyan light-ring cue */
+  .glow {
+    position: absolute; width: 900px; height: 900px; border-radius: 50%;
+    background: radial-gradient(circle, rgba(245,159,0,.22) 0%, rgba(245,159,0,0) 62%);
+    right: -180px; top: -190px;
+  }
+  .glow2 {
+    position: absolute; width: 700px; height: 700px; border-radius: 50%;
+    background: radial-gradient(circle, rgba(255,201,77,.10) 0%, rgba(255,201,77,0) 65%);
+    left: -240px; bottom: -300px;
+  }
+  .left { position: relative; padding: 0 0 0 88px; width: 810px; }
+  .brand { display: flex; align-items: center; gap: 16px; margin-bottom: 30px; }
+  .brand img { width: 60px; height: 60px; display: block; }
+  .brand span { font-size: 21px; font-weight: 500; color: #cdd3d9; letter-spacing: .2px; }
+
+  h1 {
+    font-size: 62px; line-height: 1.06; font-weight: 700; color: #fff;
+    letter-spacing: -1.6px; margin-bottom: 22px;
+  }
+  h1 em { font-style: normal; color: #ffc94d; }
+
+  p.sub {
+    font-size: 22px; line-height: 1.45; color: #9aa3ab; max-width: 620px; margin-bottom: 34px;
+  }
+
+  .pills { display: flex; gap: 10px; margin-bottom: 34px; }
+  .pill {
+    font-size: 15.5px; color: #d7dce1; border: 1px solid #333a41;
+    background: #1e2226; border-radius: 999px; padding: 9px 18px;
+  }
+  .pill.hot { border-color: #6b4b06; background: rgba(245,159,0,.13); color: #ffc94d; font-weight: 500; }
+
+  .legal { font-size: 12.5px; color: #5c646c; }
+
+  .right { position: relative; flex: 1; height: 100%; }
+  .shot {
+    position: absolute; top: 50%; left: 40px; transform: translateY(-50%);
+    height: 486px; width: auto; border-radius: 14px;
+    box-shadow: 0 30px 70px rgba(0,0,0,.6), 0 0 0 1px rgba(255,255,255,.07);
+  }
+</style>
+</head>
+<body>
+  <div class="stage">
+    <div class="glow"></div>
+    <div class="glow2"></div>
+
+    <div class="left">
+      <div class="brand">
+        <img src="../../icons/icon128.png" alt="">
+        <span>Device Manager for Alexa</span>
+      </div>
+      <h1>Star what matters.<br><em>Delete the rest.</em></h1>
+      <p class="sub">
+        List, rename and bulk-remove your smart home devices straight from the browser —
+        no more deleting them one at a time.
+      </p>
+      <div class="pills">
+        <div class="pill">List</div>
+        <div class="pill">Rename</div>
+        <div class="pill">Delete</div>
+        <div class="pill hot">&#9733; Keep favourites</div>
+      </div>
+      <div class="legal">Not created by or endorsed by Amazon. Alexa is a trademark of Amazon.com, Inc.</div>
+    </div>
+
+    <div class="right">
+      <img class="shot" src="popup.png" alt="">
+    </div>
+  </div>
+</body>
+</html>
