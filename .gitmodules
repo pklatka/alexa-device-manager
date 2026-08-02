@@ -1,3 +1,4 @@
 [submodule "alexa-device-manager-src"]
 	path = alexa-device-manager-src
 	url = git@github.com:pklatka/alexa-device-manager-src.git
+	branch = main
