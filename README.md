@@ -14,11 +14,7 @@ A Chrome extension for managing your Amazon Alexa devices directly from the brow
 - **List Devices** — View all Alexa-connected devices with their name, description, and manufacturer
 - **Rename Devices** — Inline rename with a single click
 - **Delete Devices** — Remove individual devices or bulk-delete all at once
-- **Favourites** — Star the devices you want to protect, synced across your Chrome profiles
-- **Keep favourites** *(Pro)* — Delete every device *except* your favourites, in one click
 - **Refresh** — Re-fetch the device list at any time
-
-**Keep favourites** is a one-time **$4.99** unlock — no subscription. Everything else is free.
 
 ## Installation
 
@@ -27,19 +23,19 @@ Install from the
 
 ## Usage
 
-1. Navigate to [alexa.amazon.com](https://alexa.amazon.com) and log in.
+1. Navigate to [alexa.amazon.com](https://alexa.amazon.com) and log in. Amazon will redirect you to
+   your local Alexa site — that is expected, and the extension follows you there.
 2. Click the **Device Manager for Alexa** extension icon in the toolbar.
 3. Your devices will be fetched and displayed automatically.
 4. Use the **Rename** / **Delete** buttons on each device card, or **Delete all** to remove every device.
-5. Click the **☆** on any device to mark it a favourite, then use **Keep favourites** to delete
-   everything else. The button stays disabled until at least one device is starred, so it can
-   never be used to wipe the whole list by accident.
 
 ## How It Works
 
-The extension adds a content script to `alexa.amazon.com`. When you open the popup, it asks that
-script to talk to Alexa on your behalf from within the page you already have open, reusing your
-existing Amazon session — the extension never sees or stores your Amazon credentials.
+The extension adds a content script to the Alexa web app — `alexa.amazon.com` and the regional
+sites Amazon redirects you to when you sign in (`.co.uk`, `.de`, `.fr`, `.it`, `.es`, `.ca`,
+`.com.au`, `.co.jp`, `.in`, `.com.br`, `.com.mx`). When you open the popup, it asks that script to
+talk to Alexa on your behalf from within the page you already have open, reusing your existing
+Amazon session — the extension never sees or stores your Amazon credentials.
 
 It relies on interfaces Amazon does not publish or support. Amazon can change them at any time
 without notice, which would break the extension until it is updated.
@@ -49,16 +45,13 @@ without notice, which would break the extension until it is updated.
 | Permission                   | Reason                                                     |
 | ---------------------------- | ---------------------------------------------------------- |
 | `activeTab`                  | Check whether the current tab is on Alexa                  |
-| `storage`                    | Remember your favourites and your licence status           |
-| `https://extensionpay.com/*` | Confirm a Pro purchase                                     |
 
 ## Privacy
 
 - Your device list is read and modified inside the Alexa tab you already have open. It is not sent
   anywhere else.
-- Favourites are stored in Chrome's own extension storage and sync with your Chrome profile.
 - No analytics, tracking, or telemetry of any kind.
-- The only third-party request is the Pro licence check to `extensionpay.com`.
+- No third-party requests of any kind.
 
 ## Source
 
